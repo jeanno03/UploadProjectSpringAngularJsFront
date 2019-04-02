@@ -1,0 +1,16 @@
+<div class="panel panel-danger">
+        <div class="panel-heading">Bonjour {{mySpaceMyUser.login}}</div>
+        <div class="panel-body">Bienvenue dans votre cloud personnel</div>
+</div>
+
+        <h3>Mes espaces</h3>
+
+<div class="btn-group-vertical" ng-repeat="m in mySpaceMyUser.mySpacesDto track by $index">
+        <button type="button" class="btn btn-danger" ng-click="getFiles($index)">{{m.name}}</button>
+</div>
+
+<ul ng-repeat="m in myFilesSelected">
+        <li>
+        {{m.name}}
+        </li>
+</ul>
