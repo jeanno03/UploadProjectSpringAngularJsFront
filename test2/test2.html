@@ -8,7 +8,7 @@
     <div class="panel-body">Part 2</div>
 </div>
 
-    <h3>Mes espaces</h3>
+<h3>Mes espaces</h3>
 
 <div class="btn-group-vertical" ng-repeat="m in currentUser.mySpacesDto track by $index">
     <button type="button" class="btn btn-danger" ng-click="getFiles($index)">{{m.name}}</button>
@@ -16,6 +16,6 @@
 
 <ul ng-repeat="m in myFilesSelected">
     <li>
-    {{m.name}}
+        {{m.name}}
     </li>
 </ul>
