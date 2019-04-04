@@ -34,7 +34,7 @@ app.controller("ConnectionController", function($scope,$http,$location,$localSto
     }
 
 $scope.goToMySpace=function(){ 
-    $location.path("/myspace");
+    $location.path("/mySpaceMain");
 };
 
 $scope.toDisconnect=function(){

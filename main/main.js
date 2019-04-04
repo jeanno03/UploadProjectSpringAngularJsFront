@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ui.router", "services", "ngStorage"]);
+var app = angular.module("myApp", ["ui.router", "testService", "ngStorage", "mySpaceService"]);
 
 // DIRECTIVE - FILE MODEL
 app.directive('fileModel', ['$parse', function ($parse) {
@@ -25,11 +25,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         controller: 'HomeController',
         controllerAs: 'home'
     });
-    $stateProvider.state('myspace', {
-        url: '/myspace',
-        templateUrl: 'myspace/myspace.html',
-        controller: 'MySpaceController',
-        controllerAs: 'myspace'
+    $stateProvider.state('mySpaceMain', {
+        url: '/mySpaceMain',
+        templateUrl: 'mySpace/mySpaceMain.html',
+        // controller: 'MySpaceMainController',
+        // controllerAs: 'mySpaceMain'
     });
     $stateProvider.state('search', {
         url: '/search',

@@ -1,0 +1,50 @@
+<div class="col-lg-2">
+        <!-- <section ng-controller="mySpaceNavbarController"> -->
+                <div ng-include="'mySpace/mySpaceNavbar.html'"></div>
+        <!-- </section> -->
+</div>
+
+<div class="col-lg-8">
+        <section ng-controller="mySpaceMainController">
+                <div class="panel panel-danger">
+                        <div class="panel-heading">Bonjour {{mySpaceMyUser.login}}</div>
+                        <div class="panel-body">Bienvenue dans votre cloud personnel</div>
+                </div>
+
+                <h3>Mes espaces</h3>
+
+
+                <form class="form-inline">
+                        <div class="form-group">
+                                <label class="sr-only" for="inputMySpace">Créer</label>
+                                <input ng-model="mySpaceName" type="text" class="form-control">
+                        </div>
+                        <button type="button" class="btn btn-warning" ng-click="createMySpace()">Créer</button>
+                </form>
+                <div class="btn-group-vertical" ng-repeat="m in mySpaceMyUser.mySpacesDto track by $index">
+                        <button type="button" class="btn btn-danger" ng-click="getFiles($index)">{{m.name}}</button>
+                </div>
+                <div>
+                        <table class="table table-hover">
+                                <thead>
+                                        <tr>
+                                                <th>name</th>
+                                                <th>date</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr ng-repeat="m in mySpaces">
+                                                <td>{{m.name}}</td>
+                                                <td>{{m.uploadDate}}</td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                </div>
+        </section>
+</div>
+
+<div class="col-lg-2">
+        <section>
+                <div ng-include="'mySpace/mySpaceAction.html'"></div>
+        </section>
+</div>

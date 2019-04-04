@@ -1,6 +1,6 @@
-var services = angular.module("services", []);
+var testService = angular.module("testService", []);
 
-services.factory('Logger', function() {
+testService.factory('Logger', function() {
   var Logger = {};
 
   var active = false; // par défaut le service est désactivé
@@ -53,7 +53,7 @@ services.factory('Logger', function() {
   return Logger;
 });
 
-services.factory('UserService', function(){
+testService.factory('UserService', function(){
 
 var currentUserServiceRoot = {};
 
