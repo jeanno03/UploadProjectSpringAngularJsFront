@@ -25,6 +25,7 @@ mySpaceService.factory("shareMySpaceServices", function(){
 
 mySpaceService.factory("shareMyFileService",function(){
     var currentRootMyFiles = {};
+    var currentRootMySpaceName = null;
 
     return {
 
@@ -39,6 +40,19 @@ mySpaceService.factory("shareMyFileService",function(){
         destroyCurrentRootMyFile:function(){
             currentRootMyFiles = {};
             return currentRootMyFiles;
+        },
+
+        setCurrentRootMySpaceName:function(mySpaceName){
+            currentRootMySpaceName = mySpaceName;
+        },
+
+        getCurrentRootMySpaceName:function(){
+            return currentRootMySpaceName;
+        },
+
+        destroyCurrentRootMySpaceName:function(){
+            currentRootMySpaceName = null;
+            return currentRootMySpaceName;
         }
     }
 })

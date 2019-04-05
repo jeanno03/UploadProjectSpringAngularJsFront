@@ -1,7 +1,14 @@
-.myspaceNavbarBorder{
+.mySpaceNavbarBorder{
     border: 3px blue groove;
 }
 
-.myspaceActionBorder{
+.mySpaceActionBorder{
     border: 3px black groove; 
+}
+
+.mySpaceButtomCreate{
+    margin-top :5px;
+    margin-right :2px;
+    margin-left:2px;
+    margin-bottom:5px;
 }

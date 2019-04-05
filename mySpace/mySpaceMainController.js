@@ -5,7 +5,7 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $http, $lo
     $scope.mySpaces = {};
     $rootScope.currentRootMySpaces = {};
 
-    $scope.mySpaceName = null;
+
     $scope.customHeader = {};
 
     // lié à getMyUserMySpaceJwt ==> non utilisé
@@ -30,8 +30,8 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $http, $lo
             console.log("$scope.mySpaceMyUser.login : " + $scope.mySpaceMyUser.login);
         }, function (error) {
             data = error.data;
-            console.log("error : " + data.status);
-            alert("error : " + data.status);
+            console.log("status : " + data.status);
+            alert("status : " + data.status);
         })
     }
 
@@ -54,8 +54,8 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $http, $lo
             // $location.path("/mySpaceMain");
         }, function (error) {
             data = error.data;
-            console.log("error : " + data.status);
-            alert("error : " + data.status);
+            console.log("status : " + data.status);
+            alert("status : " + data.status);
         })
     }
 
@@ -74,23 +74,6 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $http, $lo
         };
         return customHeader;
     }
-
-
-
-
-    $scope.createMySpace = function () {
-        $scope.customHeader = $scope.getCustomHeader();
-        $http.post("http://localhost:8080/MySpace/createMySpace", $scope.mySpaceName, $scope.customHeader)
-            .then(function (response) {
-                data = response.data;
-                $scope.mySpaceMyUser = data;
-
-                $location.path("/mySpaceMain");
-                $scope.init();
-            }, function (error) {
-                console.log("error : " + data.error)
-            })
-    };
 
     $scope.init();
 
