@@ -1,4 +1,4 @@
-<h3>Vos Espaces</h3>
+<div class="mySpaceNavbarBorder">
 <div ng-if="mode==0" class="mySpaceButtomCreate">
     <button type="button" class="btn btn-warning btn-lg btn-block" ng-click="displayForm()">New</button>
 </div>
@@ -14,25 +14,13 @@
             <button type="button" class="btn btn-warning" ng-click="createNewMySpace()">Créer</button>
         </div>
     </div>
-
-    <!-- <form role="form" style="display:block;">
-        <div class="form-group">
-            <input ng-model="mySpace.name" type="text" class="form-control">
-        </div>
-        <div class="form-group">
-            <input ng-model="mySpace.description" type="text" class="form-control">
-        </div>
-        <div class="mySpaceButtomCreate">
-                <button type="button" class="btn btn-danger" ng-click="cancelForm()">Annuler</button>
-                <button type="button" class="btn btn-warning" ng-click="createNewMySpace()">Créer</button>
-        </div>
-    </form> -->
 </div>
 
 
 
 <ul class="nav nav nav-stacked" ng-repeat="c in currentRootMySpaces">
     <li class="active">
-        <a href="#" ng-click="getAllFilesFromMySpace(c.name)">{{c.name}}</a>
+        <a href="#" ng-click="selectMySpace(c.name)">{{c.name}}</a>
     </li>
 </ul>
+</div>

@@ -1,21 +1,41 @@
 var mySpaceService = angular.module("mySpaceService", []);
 
-mySpaceService.factory("shareMySpaceServices", function(){
+
+mySpaceService.factory("mySpaceHttpService", function ($http) {
+
+    return {
+
+        getAllMySpacesJwt: function (customHeader) {
+            return $http.get("http://localhost:8080/MySpace/getAllMySpaceJwt", customHeader);
+        },
+
+        selectMySpace: function (item, customHeader) {
+            return $http.get("http://localhost:8080/MySpace/getMySpaceByName?name=" + item, customHeader);
+        },
+
+        createMySpace:function (mySpace, customHeader){
+            return $http.post("http://localhost:8080/MySpace/createMySpace", mySpace, customHeader);
+        },
+
+    }
+});
+
+mySpaceService.factory("shareMySpaceServices", function () {
 
     var currentRootMySpaces = {};
 
     return {
 
-        setCurrentRootMySpace:function(mySpaces){
-            currentRootMySpaces=mySpaces;
+        setCurrentRootMySpace: function (mySpaces) {
+            currentRootMySpaces = mySpaces;
         },
 
         getCurrentRootMySpaces: function () {
             return currentRootMySpaces;
         },
 
-        destroyCurrentRootMySpace:function(){
-            currentRootMySpaces={};
+        destroyCurrentRootMySpace: function () {
+            currentRootMySpaces = {};
             return currentRootMySpaces;
         }
     }
@@ -23,36 +43,23 @@ mySpaceService.factory("shareMySpaceServices", function(){
 });
 
 
-mySpaceService.factory("shareMyFileService",function(){
-    var currentRootMyFiles = {};
-    var currentRootMySpaceName = null;
+mySpaceService.factory("shareMyFileService", function () {
+
+    var currentRootMySpace = {};
 
     return {
 
-        setCurrentRootMyFile:function(myFiles){
-            currentRootMyFiles=myFiles;
+        setCurrentRootMySpace: function (mySpace) {
+            currentRootMySpace = mySpace;
         },
 
-        getCurrentRootMyFile:function(){
-            return currentRootMyFiles;
+        getCurrentRootMySpace: function () {
+            return currentRootMySpace;
         },
 
-        destroyCurrentRootMyFile:function(){
-            currentRootMyFiles = {};
-            return currentRootMyFiles;
-        },
-
-        setCurrentRootMySpaceName:function(mySpaceName){
-            currentRootMySpaceName = mySpaceName;
-        },
-
-        getCurrentRootMySpaceName:function(){
-            return currentRootMySpaceName;
-        },
-
-        destroyCurrentRootMySpaceName:function(){
-            currentRootMySpaceName = null;
-            return currentRootMySpaceName;
+        destroyCurrentRootMySpace: function () {
+            currentRootMySpace = null;
+            return currentRootMySpace;
         }
     }
 })

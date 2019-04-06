@@ -1,4 +1,9 @@
-app.controller("SearchController", function($scope,$http,$location,$localStorage){
-    $scope.currentUser={};
-    $scope.currentUser = $localStorage.currentUser;
+app.controller("SearchController", function($scope, $rootScope, $http,$location,$localStorage){
+
+    $scope.init = function () {
+        //utile car le token est gardé meme si la page est fermé
+        $rootScope.jwt = $localStorage.jwt;
+    }
+
+    $scope.init();
 });

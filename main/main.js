@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ui.router", "testService", "ngStorage", "mySpaceService"]);
+var app = angular.module("myApp", ["ui.router", "testService", "connectionService","ngStorage", "mySpaceService"]);
 
 // DIRECTIVE - FILE MODEL
 app.directive('fileModel', ['$parse', function ($parse) {

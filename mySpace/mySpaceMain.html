@@ -8,13 +8,13 @@
 
 <div class="col-lg-8">
         <section ng-controller="mySpaceMainController">
-                <div class="panel panel-danger">
+                <div class="panel panel-warning">
                         <div class="panel-heading">Bonjour {{mySpaceMyUser.login}}</div>
                         <div class="panel-body">Bienvenue dans votre cloud personnel</div>
                 </div>
 
                 <div>
-                        <h3>{{currentRootMySpaceName}}</h3>
+
                         <table class="table table-hover">
                                 <thead>
                                         <tr>
@@ -23,7 +23,7 @@
                                         </tr>
                                 </thead>
                                 <tbody>
-                                        <tr ng-repeat="c in currentRootMyFiles">
+                                        <tr ng-repeat="c in currentRootMySpace.myFilesDto">
                                                 <td>{{c.name}}</td>
                                                 <td>{{c.uploadDate}}</td>
                                         </tr>
@@ -34,7 +34,7 @@
 </div>
 
 <div class="col-lg-2">
-        <section>
-                <div ng-include="'mySpace/mySpaceAction.html'"></div>
+        <section ng-controller="mySpaceDescriptionController">
+                <div ng-include="'mySpace/mySpaceDescription.html'"></div>
         </section>
 </div>
