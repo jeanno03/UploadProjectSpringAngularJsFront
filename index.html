@@ -23,19 +23,20 @@
         <div class="row">
             <div ui-view></div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-12">
                 <div class="footer" ng-include="'footer/footer.html'"></div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="node_modules/ngstorage/ngStorage.min.js"></script>
     <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
-    <!-- <script type="text/javascript" src="node_modules/filereader/FileReader.js"></script> -->
+    <script type="text/javascript" src="node_modules/angular-jwt/dist/angular-jwt.min.js"></script>
     <script type="text/javascript" src="main/main.js"></script>
+    <script type="text/javascript" src="main/mainDirective.js"></script>
     <script type="text/javascript" src="header/headerController.js"></script>
     <script type="text/javascript" src="home/homeController.js"></script>
     <script type="text/javascript" src="mySpace/mySpaceMainController.js"></script>
@@ -49,7 +50,6 @@
     <script type="text/javascript" src="test2/test2Controller.js"></script>
     <script type="text/javascript" src="connection/connectionController.js"></script>
     <script type="text/javascript" src="connection/connectionService.js"></script>
-
 
 </body>
 

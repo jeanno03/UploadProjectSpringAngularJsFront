@@ -1,4 +1,4 @@
-app.controller("Test1Controller", function ($scope, $http, $location, Logger, UserService, $localStorage) {
+app.controller("Test1Controller", function ($scope, $rootScope, $http, $location, Logger, UserService, $localStorage, connectionTokenService, jwtHelper) {
     $scope.myUsers = {};
     Logger.turnOn(); // On active le logger
     Logger.log('Page chargée !'); // Log au chargement de la page
@@ -13,6 +13,8 @@ app.controller("Test1Controller", function ($scope, $http, $location, Logger, Us
     $scope.currentUser = {};
     $scope.currentUser = $localStorage.currentUser;
 
+    $scope.uploadResult = "";
+
     //contient le mdp pour accéder au controller de test
     var customHeader = {
         headers:
@@ -20,7 +22,6 @@ app.controller("Test1Controller", function ($scope, $http, $location, Logger, Us
             "bearer": "1234"
         }
     };
-
 
     $scope.getDataTest = function () {
         $scope.str = null;
@@ -67,7 +68,6 @@ app.controller("Test1Controller", function ($scope, $http, $location, Logger, Us
         UserService.destroyMyUser();
     }
 
-
     $scope.getConnect = function () {
         $http.post("http://localhost:8080/Test/getConnect", $scope.credential).then(function (response) {
             console.log("success");
@@ -101,7 +101,6 @@ app.controller("Test1Controller", function ($scope, $http, $location, Logger, Us
         $localStorage.currentUser = myUser;
     }
 
-
     $scope.uploadResult = "";
 
     $scope.myForm = {
@@ -117,7 +116,7 @@ app.controller("Test1Controller", function ($scope, $http, $location, Logger, Us
         var data = new FormData();
         console.log(" $scope.myForm.files.length : " + $scope.myForm.files.length);
         data.append("description", $scope.myForm.description);
-        
+
         for (i = 0; i < $scope.myForm.files.length; i++) {
             data.append("files", $scope.myForm.files[i]);
         }
@@ -130,7 +129,6 @@ app.controller("Test1Controller", function ($scope, $http, $location, Logger, Us
             }
         }
 
-
         $http.post(url, data, config).then(
             // Success
             function (response) {
@@ -141,6 +139,61 @@ app.controller("Test1Controller", function ($scope, $http, $location, Logger, Us
                 $scope.uploadResult = response.data;
             });
     };
+
+    //au lancement de la page va envoyer le token en header pour récupérer myUserDto
+    $scope.init = function () {
+        //utile car le token est gardé meme si la page est fermé
+        $rootScope.jwt = $localStorage.jwt;
+        //on met le token dans le header
+        $rootScope.customHeader = connectionTokenService.getTokenHeader();
+
+        var expToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NhbXBsZXMuYXV0aDAuY29tLyIsInN1YiI6ImZhY2Vib29rfDEwMTU0Mjg3MDI3NTEwMzAyIiwiYXVkIjoiQlVJSlNXOXg2MHNJSEJ3OEtkOUVtQ2JqOGVESUZ4REMiLCJleHAiOjE0MTIyMzQ3MzAsImlhdCI6MTQxMjE5ODczMH0.7M5sAV50fF1-_h9qVbdSgqAnXVF7mz3I6RjS6JiH0H8';
+
+        var tokenPayload = jwtHelper.decodeToken(expToken);
+        console.log("tokenPayload example 1 : " + tokenPayload);
+
+        var expirationDate = jwtHelper.getTokenExpirationDate(expToken);
+        console.log("expiration token example 1 : " + expirationDate);
+
+        try {
+            $scope.realToken = $localStorage.jwt;
+
+            console.log("$scope.realToken.token : " + $scope.realToken.token);
+
+            var realDecodeToken = connectionTokenService.getDecodeToken();
+            console.log("realDecodeToken : " + realDecodeToken);
+
+            console.log("realDecodeToken.kid : " + realDecodeToken.kid);
+            console.log("realDecodeToken.alg : " + realDecodeToken.alg);
+            console.log("realDecodeToken.sub : " + realDecodeToken.sub);
+            console.log("realDecodeToken.iss : " + realDecodeToken.iss);
+            console.log("realDecodeToken.roles[0] : " + realDecodeToken.roles[0]);
+
+
+            var tokenSub = connectionTokenService.getTokenSub();
+            console.log("tokenSub : " + tokenSub);
+
+            var tokenRoles = connectionTokenService.getTokenRoles();
+            console.log("tokenRoles[0] : " + tokenRoles[0]);
+
+            var realExpirationTokenDate = connectionTokenService.getTokenExpirationDate();
+            console.log("realExpirationTokenDate : " + realExpirationTokenDate);
+
+
+            //test
+            var token1 = $localStorage.jwt;
+            console.log("token1 : " + token1);
+
+            var token2 = $localStorage.jwt.token;
+            console.log("token2 : " + token2);
+
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+
+    $scope.init();
 
 
 });

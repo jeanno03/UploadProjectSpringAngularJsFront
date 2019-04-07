@@ -169,25 +169,28 @@ Détruire currentUser<button ng-click="destroyMyUser()" type="button" class="btn
 <!-- https://www.journaldunet.fr/web-tech/developpement/1202745-comment-gerer-l-upload-d-un-fichier-avec-angularjs/ -->
 <!-- a revoir
 https://www.angularcode.com/simple-file-upload-example-using-angularjs/ -->
- <!-- https://jsfiddle.net/iaguilarmartin/9gh4qsvq/ -->
- <!-- https://stackoverflow.com/questions/24443246/angularjs-how-to-upload-multipart-form-data-and-a-file -->
- <!-- https://o7planning.org/fr/11673/le-exemple-de-upload-file-avec-spring-boot-rest-et-angularjs -->
+<!-- https://jsfiddle.net/iaguilarmartin/9gh4qsvq/ -->
+<!-- https://stackoverflow.com/questions/24443246/angularjs-how-to-upload-multipart-form-data-and-a-file -->
+<!-- https://o7planning.org/fr/11673/le-exemple-de-upload-file-avec-spring-boot-rest-et-angularjs -->
 <h3>Upload test</h3>
 
 <div>
+
     <form>
-       Description: <br/>
-       <input type="text" name="description" ng-model="myForm.description" style="width:350px;"/>
-       <br/><br/>                 
-       File to upload (1): <input type="file" file-model="myForm.files[0]"/><br />      
-       File to upload (2): <input type="file" file-model="myForm.files[1]"/><br />    
-       File to upload (3): <input type="file" file-model="myForm.files[2]"/><br />    
-       File to upload (4): <input type="file" file-model="myForm.files[3]"/><br />    
-       File to upload (5): <input type="file" file-model="myForm.files[4]"/><br />    
-       <button type="button" ng-click="doUploadFile()">Upload</button>
+        Description: <br />
+        <input type="text" name="description" ng-model="myForm.description" style="width:350px;" />
+        <br /><br />
+        File to upload (1): <input type="file" file-model="myForm.files[0]" /><br />
+        File to upload (2): <input type="file" file-model="myForm.files[1]" /><br />
+        File to upload (3): <input type="file" file-model="myForm.files[2]" /><br />
+        File to upload (4): <input type="file" file-model="myForm.files[3]" /><br />
+        File to upload (5): <input type="file" file-model="myForm.files[4]" /><br />
+        <button type="button" ng-click="doUploadFile()">Upload</button>
     </form>
-    <h2>Upload Results:</h2>
-    <div style="border:1px solid #ccc;padding: 5px;">
-       <span ng-bind="uploadResult"></span>
+    <div>
+        Upload : <span ng-bind="uploadResult"></span>
     </div>
- </div>
+
+    <!-- <div style="border:1px solid #ccc;padding: 5px;"> -->
+
+</div>

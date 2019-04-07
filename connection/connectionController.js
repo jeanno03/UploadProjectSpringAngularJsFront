@@ -16,16 +16,14 @@ app.controller("ConnectionController", function ($scope, $rootScope, $location, 
                 console.log("$scope.jwt.token : " + $scope.jwt.token);
 
                 $scope.tokenToLocalStorage($scope.jwt);
-
-                // $rootScope.jwt = null;
                 $rootScope.jwt = $localStorage.jwt;
 
                 $location.path("/mySpaceMain");
 
             }, function (error) {
                 data = error.data;
-                console.log("error : " + data.return);
-                alert("error : " + data.return);
+                console.log("error : " + data.status);
+                alert("error : " + data.status);
             });
     }
 

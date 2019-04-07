@@ -1,20 +1,23 @@
-
-        <div class="col-lg-2">
-                <section ng-controller="mySpaceNavbarController">
+<div class="col-lg-2">
+        <section ng-controller="mySpaceNavbarController">
                 <div ng-include="'mySpace/mySpaceNavbar.html'"></div>
-                </section>
-        </div>
-
+        </section>
+</div>
 
 <div class="col-lg-8">
         <section ng-controller="mySpaceMainController">
                 <div class="panel panel-warning">
-                        <div class="panel-heading">Bonjour {{mySpaceMyUser.login}}</div>
+                        <div class="panel-heading">Bonjour a refaire {{mySpaceMyUser.login}}</div>
                         <div class="panel-body">Bienvenue dans votre cloud personnel</div>
                 </div>
-
+                <div ng-if="currentRootMySpace.id">
+                        <span class="control-fileupload">
+                                <label for="fileInput">Choose a file :</label>
+                                <input type="file" file-model="myForm.multipartFiles[0]">
+                                <button type="button" ng-click="doUploadFile()">Upload</button>
+                        </span>
+                </div>
                 <div>
-
                         <table class="table table-hover">
                                 <thead>
                                         <tr>
