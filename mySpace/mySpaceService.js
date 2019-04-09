@@ -17,6 +17,12 @@ mySpaceService.factory("mySpaceHttpService", function ($http) {
             return $http.post("http://localhost:8080/MySpace/createMySpace", mySpace, customHeader);
         },
 
+        downloadingMyFile:function(item, customHeader){
+            return $http.get("http://localhost:8080/MyFile/downloadingMyFile?fichier=" + item, customHeader,{
+                responseType: "arraybuffer" 
+            });
+        }
+
     }
 });
 

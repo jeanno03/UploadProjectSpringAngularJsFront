@@ -27,7 +27,7 @@
                                 </thead>
                                 <tbody>
                                         <tr ng-repeat="c in currentRootMySpace.myFilesDto">
-                                                <td>{{c.name}}</td>
+                                                <td><a href="#" ng-click="downloadingMyFile(c.id)">{{c.name}}</a></td>
                                                 <td>{{c.uploadDate}}</td>
                                         </tr>
                                 </tbody>

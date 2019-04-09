@@ -85,4 +85,31 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $http, $lo
             });
     };
 
+ 
+//https://stackoverflow.com/questions/40606181/download-zip-file-from-rest-web-service-angularjs
+    $scope.fileDownload = [];
+    $scope.downloadingMyFile = function (item) {
+        console.log("angularJs - downloadingMyFile");
+        mySpaceHttpService.downloadingMyFile(item, $rootScope.customHeader)
+            .then(function (response) {
+
+                return response;
+                // data = response.data;
+                // $scope.fileDownload = data;
+                // console.log("$scope.fileDownload : " + $scope.fileDownload);
+
+
+                // var resp = {};
+                // resp.data = data;
+
+                // return resp;
+
+
+            }, function (error) {
+                data = error.data;
+                console.log("status : " + data.status)
+            })
+    }
+
+
 });
