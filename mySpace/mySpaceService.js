@@ -18,9 +18,7 @@ mySpaceService.factory("mySpaceHttpService", function ($http) {
         },
 
         downloadingMyFile:function(item, customHeader){
-            return $http.get("http://localhost:8080/MyFile/downloadingMyFile?fichier=" + item, customHeader,{
-                responseType: "arraybuffer" 
-            });
+            return $http.get("http://localhost:8080/MyFile/downloadingMyFile?fichier=" + item, customHeader, {responseType: "arraybuffer"});
         }
 
     }

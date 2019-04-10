@@ -1,4 +1,4 @@
-app.controller("mySpaceMainController", function ($scope, $rootScope, $http, $location, shareMySpaceServices, $localStorage, mySpaceHttpService, connectionTokenService, connectionHttpService) {
+app.controller("mySpaceMainController", function ($window, $scope, $rootScope, $http, $location, shareMySpaceServices, $localStorage, mySpaceHttpService, connectionTokenService, connectionHttpService) {
 
     $scope.mySpaces = {};
     // $rootScope.customHeader = connectionTokenService.getTokenHeader();
@@ -64,9 +64,9 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $http, $lo
             data.append("multipartFiles", $scope.myForm.multipartFiles[i])
         }
 
-        connectionHttpService.getUploadFile(mySpaceId, data).then(
-            //Success
-            function (response) {
+        connectionHttpService.getUploadFile(mySpaceId, data).
+            then(function (response) {
+                //Success
                 data = response.data;
                 $scope.uploadResult = data;
 
@@ -78,38 +78,40 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $http, $lo
                 }
                 $location.path("/mySpaceMain");
             },
-            //Error
-            function (error) {
-                error = error.data;
-                alert("status : " + error.status);
-            });
+                //Error
+                function (error) {
+                    error = error.data;
+                    alert("status : " + error.status);
+                });
     };
 
- 
-//https://stackoverflow.com/questions/40606181/download-zip-file-from-rest-web-service-angularjs
-    $scope.fileDownload = [];
-    $scope.downloadingMyFile = function (item) {
-        console.log("angularJs - downloadingMyFile");
-        mySpaceHttpService.downloadingMyFile(item, $rootScope.customHeader)
-            .then(function (response) {
 
-                return response;
-                // data = response.data;
-                // $scope.fileDownload = data;
-                // console.log("$scope.fileDownload : " + $scope.fileDownload);
+    //https://stackoverflow.com/questions/40606181/download-zip-file-from-rest-web-service-angularjs
+    //https://stackoverflow.com/questions/29747136/download-a-file-using-angular-js-and-a-spring-based-restful-web-service
+    //https://stackoverflow.com/questions/20099784/open-links-in-new-window-using-angularjs/33837795
 
+    //http://javabypatel.blogspot.com/2016/11/download-binary-file-angularjs-rest.html
+    $scope.downloadingMyFile = function (id, name) {
+        console.log("angularJs - downloadingMyFile2");
+        var url = "http://localhost:8080/MyFile/downloadingMyFile?fichier=" + id;
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.setRequestHeader("token", $localStorage.jwt.token);
+        xhr.responseType = "arraybuffer";
+        xhr.onload = function () {
+            if (this.status === 200) {
+                var blob = new Blob([xhr.response]);
+                var a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = name;
+                a.click();
+            }
+        };
+        xhr.send(JSON.stringify(
+            {
 
-                // var resp = {};
-                // resp.data = data;
-
-                // return resp;
-
-
-            }, function (error) {
-                data = error.data;
-                console.log("status : " + data.status)
             })
-    }
-
+        );
+    };
 
 });

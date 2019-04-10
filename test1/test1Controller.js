@@ -195,5 +195,10 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
 
     $scope.init();
 
+    $scope.getFile=function(){
+        var url ="http://localhost:8080/Test/download2?image=Albator-007";
+        window.open(url, '_blank', '');
+    }
+
 
 });
