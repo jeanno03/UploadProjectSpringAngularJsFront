@@ -1,18 +1,15 @@
-app.controller("mySpaceNavbarController", function ($scope, $rootScope, $http, shareMyFileService, $location, shareMySpaceServices, connectionTokenService, mySpaceHttpService) {
-    $scope.myFiles = {};
+app.controller("mySpaceNavbarController", function ($scope, $rootScope, shareMyFileService, $location, shareMySpaceServices, httpHeaderService, httpUrlService) {
+
     $scope.customHeader = {};
-
     $rootScope.currentRootMySpace = {};
-
     $scope.mySpace = {};
     $scope.mySpaceByName = {};
-
     $scope.mySpaceMyUser = {};
 
     $scope.mode = 0;
 
-    $scope.selectMySpace = function (item) {
-        mySpaceHttpService.selectMySpace(item, $rootScope.customHeader).then(function (response) {
+    $rootScope.selectMySpace = function (item) {
+        httpUrlService.selectMySpace(item, $rootScope.customHeader).then(function (response) {
             data = response.data;
             $scope.mySpaceByName = data;
             $scope.processSetCurrentRootMySpace($scope.mySpaceByName);
@@ -27,7 +24,7 @@ app.controller("mySpaceNavbarController", function ($scope, $rootScope, $http, s
     $scope.createNewMySpace = function (item) {
 
         // $http.post("http://localhost:8080/MySpace/createMySpace", $scope.mySpace, $rootScope.customHeader)
-        mySpaceHttpService.createMySpace($scope.mySpace, $rootScope.customHeader)
+        httpUrlService.createMySpace($scope.mySpace, $rootScope.customHeader)
             .then(function (response) {
                 data = response.data;
                 $scope.mySpaceMyUser = data;
@@ -42,7 +39,10 @@ app.controller("mySpaceNavbarController", function ($scope, $rootScope, $http, s
                 shareMySpaceServices.setCurrentRootMySpace
 
                 //je recherche le nouvel espace créé qui va afficher dans mySpaceDescription
-                $scope.selectMySpace(mySpaceProvisoire);
+                $rootScope.selectMySpace(mySpaceProvisoire);
+
+                //je réactualise la liste
+                $rootScope.getAllMySpacesJwt();
 
 
             }, function (error) {
@@ -68,8 +68,6 @@ app.controller("mySpaceNavbarController", function ($scope, $rootScope, $http, s
 
 
     $scope.init = function () {
-        //on met le token dans le header
-        $rootScope.customHeader = connectionTokenService.getTokenHeader();
     }
 
     $scope.init();

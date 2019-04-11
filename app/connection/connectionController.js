@@ -1,4 +1,4 @@
-app.controller("ConnectionController", function ($scope, $rootScope, $location, $localStorage, connectionHttpService) {
+app.controller("ConnectionController", function ($scope, $rootScope, $location, $localStorage, httpUrlService) {
 
     $scope.credential = {};
 
@@ -7,7 +7,7 @@ app.controller("ConnectionController", function ($scope, $rootScope, $location, 
 
         $scope.jwt = {};
 
-        connectionHttpService.getConnectJwt($scope.credential)
+        httpUrlService.getConnectJwt($scope.credential)
             .then(function (response) {
                 console.log("success");
                 data = response.data;

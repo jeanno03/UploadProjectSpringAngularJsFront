@@ -1,14 +1,17 @@
 <div class="col-lg-2">
         <section ng-controller="mySpaceNavbarController">
-                <div ng-include="'mySpace/mySpaceNavbar.html'"></div>
+                <div ng-include="'app/mySpace/mySpaceNavbar.html'"></div>
         </section>
 </div>
 
 <div class="col-lg-8">
         <section ng-controller="mySpaceMainController">
                 <div class="panel panel-warning">
-                        <div class="panel-heading">Bonjour a refaire {{mySpaceMyUser.login}}</div>
-                        <div class="panel-body">Bienvenue dans votre cloud personnel</div>
+                        <div class="panel-heading">Bonjour {{login}}</div>
+                        <div class="panel-body">
+                                <p>Bienvenue dans votre cloud personnel</p>
+                                <h3>{{currentRootMySpace.name}}</h3>
+                        </div>
                 </div>
                 <div ng-if="currentRootMySpace.id">
                         <span class="control-fileupload">
@@ -27,7 +30,9 @@
                                 </thead>
                                 <tbody>
                                         <tr ng-repeat="c in currentRootMySpace.myFilesDto">
-                                                <td><a href="#" ng-click="downloadingMyFile(c.id, c.name)">{{c.name}}</a></td>
+                                                <td><a href="#"
+                                                                ng-click="downloadingMyFile(c.id, c.name)">{{c.name}}</a>
+                                                </td>
                                                 <td>{{c.uploadDate}}</td>
                                         </tr>
                                 </tbody>
@@ -38,6 +43,6 @@
 
 <div class="col-lg-2">
         <section ng-controller="mySpaceDescriptionController">
-                <div ng-include="'mySpace/mySpaceDescription.html'"></div>
+                <div ng-include="'app/mySpace/mySpaceDescription.html'"></div>
         </section>
 </div>

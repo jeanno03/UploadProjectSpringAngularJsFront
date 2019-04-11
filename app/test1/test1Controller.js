@@ -1,4 +1,4 @@
-app.controller("Test1Controller", function ($scope, $rootScope, $http, $location, Logger, UserService, $localStorage, connectionTokenService, jwtHelper) {
+app.controller("Test1Controller", function ($scope, $rootScope, $http, $location, Logger, UserService, $localStorage, jwtHelper, httpHeaderService) {
     $scope.myUsers = {};
     Logger.turnOn(); // On active le logger
     Logger.log('Page chargée !'); // Log au chargement de la page
@@ -145,7 +145,7 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
         //utile car le token est gardé meme si la page est fermé
         $rootScope.jwt = $localStorage.jwt;
         //on met le token dans le header
-        $rootScope.customHeader = connectionTokenService.getTokenHeader();
+        $rootScope.customHeader = httpHeaderService.getTokenHeader();
 
         var expToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NhbXBsZXMuYXV0aDAuY29tLyIsInN1YiI6ImZhY2Vib29rfDEwMTU0Mjg3MDI3NTEwMzAyIiwiYXVkIjoiQlVJSlNXOXg2MHNJSEJ3OEtkOUVtQ2JqOGVESUZ4REMiLCJleHAiOjE0MTIyMzQ3MzAsImlhdCI6MTQxMjE5ODczMH0.7M5sAV50fF1-_h9qVbdSgqAnXVF7mz3I6RjS6JiH0H8';
 
@@ -160,7 +160,7 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
 
             console.log("$scope.realToken.token : " + $scope.realToken.token);
 
-            var realDecodeToken = connectionTokenService.getDecodeToken();
+            var realDecodeToken = httpHeaderService.getDecodeToken();
             console.log("realDecodeToken : " + realDecodeToken);
 
             console.log("realDecodeToken.kid : " + realDecodeToken.kid);
@@ -170,13 +170,13 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
             console.log("realDecodeToken.roles[0] : " + realDecodeToken.roles[0]);
 
 
-            var tokenSub = connectionTokenService.getTokenSub();
+            var tokenSub = httpHeaderService.getTokenSub();
             console.log("tokenSub : " + tokenSub);
 
-            var tokenRoles = connectionTokenService.getTokenRoles();
+            var tokenRoles = httpHeaderService.getTokenRoles();
             console.log("tokenRoles[0] : " + tokenRoles[0]);
 
-            var realExpirationTokenDate = connectionTokenService.getTokenExpirationDate();
+            var realExpirationTokenDate = httpHeaderService.getTokenExpirationDate();
             console.log("realExpirationTokenDate : " + realExpirationTokenDate);
 
 

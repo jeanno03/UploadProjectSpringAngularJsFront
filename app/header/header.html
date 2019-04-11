@@ -12,7 +12,8 @@
     <!-- Collection of nav links, forms, and other content for toggling -->
     <div id="navbarCollapse" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a ui-sref="mySpaceMain">mySpace</a></li>
+            <!-- <li class="active"><a ui-sref="mySpaceMain">mySpace</a></li> -->
+            <li class="active"><a ng-click="goToMySpace()">mySpace</a></li>
         </ul>
         <form class="navbar-form navbar-left">
             <div class="input-group">
@@ -26,7 +27,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a ui-sref="test1">test1</a></li>
             <li><a ui-sref="test2">test2</a></li>
-            <!-- <li ng-if="currentUser.login==null"><a ui-sref="connection">connection</a></li> -->
+            <li ng-if="jwt.token!=null"><a>Vous êtes connecté</a></li>
             <li><a ui-sref="connection">connection</a></li>
         </ul>
     </div>

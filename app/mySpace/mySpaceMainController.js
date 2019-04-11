@@ -1,31 +1,24 @@
-app.controller("mySpaceMainController", function ($window, $scope, $rootScope, $http, $location, shareMySpaceServices, $localStorage, mySpaceHttpService, connectionTokenService, connectionHttpService) {
-
+app.controller("mySpaceMainController", function ($scope, $rootScope, $location, shareMySpaceServices, shareMyFileService, $localStorage, httpHeaderService, httpUrlService) {
+    $scope.login = null;
     $scope.mySpaces = {};
-    // $rootScope.customHeader = connectionTokenService.getTokenHeader();
 
+    $scope.uploadResult = {};
 
-    //au lancement de la page va envoyer le token en header pour récupérer myUserDto
-    $scope.init = function () {
-        //utile car le token est gardé meme si la page est fermé
-        $rootScope.jwt = $localStorage.jwt;
-        //on met le token dans le header
-        $rootScope.customHeader = connectionTokenService.getTokenHeader();
-        $scope.getAllMySpacesJwt();
-
+    $scope.myForm = {
+        multipartFiles: []
     }
 
     //(requete native en back)
-    $scope.getAllMySpacesJwt = function () {
+    $rootScope.getAllMySpacesJwt = function () {
+        console.log("getAllMySpacesJwt()");
 
-        mySpaceHttpService.getAllMySpacesJwt($rootScope.customHeader).then(function (response) {
+        httpUrlService.getAllMySpacesJwt($rootScope.customHeader).then(function (response) {
             data = response.data;
             $scope.mySpaces = data;
 
             //je partage $scope.mySpaces
-            $rootScope.currentRootMySpaces = {};
-            $scope.setMySpaceToCurrentRootMySpaces($scope.mySpaces);
-            $scope.getMySpaceToCurrentRootMySpaces();
-
+            shareMySpaceServices.setCurrentRootMySpace($scope.mySpaces);
+            $rootScope.currentRootMySpaces = shareMySpaceServices.getCurrentRootMySpaces();
             //pour rafraichir et lancer le init() de ConnectionController
             $location.path("/mySpaceMain");
 
@@ -39,22 +32,6 @@ app.controller("mySpaceMainController", function ($window, $scope, $rootScope, $
 
     }
 
-    $scope.setMySpaceToCurrentRootMySpaces = function (item) {
-        shareMySpaceServices.setCurrentRootMySpace(item);
-    }
-
-    $scope.getMySpaceToCurrentRootMySpaces = function () {
-        $rootScope.currentRootMySpaces = shareMySpaceServices.getCurrentRootMySpaces();
-    }
-
-    $scope.init();
-
-    $scope.uploadResult = {};
-
-    $scope.myForm = {
-        multipartFiles: []
-    }
-
     $scope.doUploadFile = function () {
 
         var mySpaceId = $rootScope.currentRootMySpace.id;
@@ -64,7 +41,7 @@ app.controller("mySpaceMainController", function ($window, $scope, $rootScope, $
             data.append("multipartFiles", $scope.myForm.multipartFiles[i])
         }
 
-        connectionHttpService.getUploadFile(mySpaceId, data).
+        httpUrlService.getUploadFile(mySpaceId, data).
             then(function (response) {
                 //Success
                 data = response.data;
@@ -76,7 +53,11 @@ app.controller("mySpaceMainController", function ($window, $scope, $rootScope, $
                 $scope.myForm = {
                     multipartFiles: []
                 }
-                $location.path("/mySpaceMain");
+
+                //je réaffiche la liste de tous les fichiers
+                $rootScope.selectMySpace($rootScope.currentRootMySpace.name);
+                $rootScope.currentRootMySpace = shareMyFileService.getCurrentRootMySpace();
+
             },
                 //Error
                 function (error) {
@@ -113,5 +94,31 @@ app.controller("mySpaceMainController", function ($window, $scope, $rootScope, $
             })
         );
     };
+
+    $scope.init = function () {
+        //utile car le token est gardé meme si la page est fermé
+        $rootScope.jwt = $localStorage.jwt;
+        //on met le token dans le header
+        $rootScope.customHeader = httpHeaderService.getTokenHeader();
+
+        //je récupère le login
+        var decodeToken = httpHeaderService.getDecodeToken();
+        $scope.login = decodeToken.sub;
+
+        $rootScope.currentRootMySpaces = shareMySpaceServices.getCurrentRootMySpaces();
+        $rootScope.currentRootMySpace = shareMyFileService.getCurrentRootMySpace();
+        try {
+            if ($rootScope.currentRootMySpaces[0] == null) {
+                console.log("need to launch getAllMySpacesJwt()");
+                $scope.getAllMySpacesJwt();
+            }
+
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
+
+    $scope.init();
 
 });

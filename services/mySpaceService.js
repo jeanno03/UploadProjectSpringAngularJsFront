@@ -1,29 +1,5 @@
 var mySpaceService = angular.module("mySpaceService", []);
 
-
-mySpaceService.factory("mySpaceHttpService", function ($http) {
-
-    return {
-
-        getAllMySpacesJwt: function (customHeader) {
-            return $http.get("http://localhost:8080/MySpace/getAllMySpaceJwt", customHeader);
-        },
-
-        selectMySpace: function (item, customHeader) {
-            return $http.get("http://localhost:8080/MySpace/getMySpaceByName?name=" + item, customHeader);
-        },
-
-        createMySpace:function (mySpace, customHeader){
-            return $http.post("http://localhost:8080/MySpace/createMySpace", mySpace, customHeader);
-        },
-
-        downloadingMyFile:function(item, customHeader){
-            return $http.get("http://localhost:8080/MyFile/downloadingMyFile?fichier=" + item, customHeader, {responseType: "arraybuffer"});
-        }
-
-    }
-});
-
 mySpaceService.factory("shareMySpaceServices", function () {
 
     var currentRootMySpaces = {};
@@ -67,3 +43,4 @@ mySpaceService.factory("shareMyFileService", function () {
         }
     }
 })
+

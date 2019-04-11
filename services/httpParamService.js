@@ -1,25 +1,6 @@
-var connectionService = angular.module("connectionService", []);
+var httpParamService = angular.module("httpParamService", []);
 
-connectionService.factory("connectionHttpService", function ($http, connectionTokenService) {
-
-    return {
-
-        getConnectJwt: function (credential) {
-            return $http.post("http://localhost:8080/MyUser/getConnectJwt", credential);
-        },
-
-        getUploadFile: function (mySpaceId, data) {
-
-            var uploadFileUrl = "http://localhost:8080/MyFile/uploadingMyFilesPut?id=";
-            var tokenHeaderContentType = connectionTokenService.getTokenHeaderContentType();
-
-            return $http.put(uploadFileUrl + mySpaceId, data, tokenHeaderContentType);
-        }
-
-    }
-});
-
-connectionService.factory("connectionTokenService", function ($localStorage, jwtHelper) {
+httpParamService.factory("httpHeaderService", function ($localStorage, jwtHelper) {
 
     var decodeToken = {};
 

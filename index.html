@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="main/main.css" />
-    <link rel="stylesheet" type="text/css" href="connection/connection.css" />
-    <link rel="stylesheet" type="text/css" href="mySpace/mySpace.css" />
-    <link rel="stylesheet" type="text/css" href="footer/footer.css" />
+    <link rel="stylesheet" type="text/css" href="app/connection/connection.css" />
+    <link rel="stylesheet" type="text/css" href="app/mySpace/mySpace.css" />
+    <link rel="stylesheet" type="text/css" href="app/footer/footer.css" />
     <title>upload-project</title>
 </head>
 
@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <section ng-controller="headerController">
-                    <div ng-include="'header/header.html'"></div>
+                    <div ng-include="'app/header/header.html'"></div>
                 </section>
             </div>
         </div>
@@ -30,26 +30,39 @@
         </div> -->
     </div>
 
+
+
+    <!-- Modules -->
     <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
     <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="node_modules/ngstorage/ngStorage.min.js"></script>
     <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
     <script type="text/javascript" src="node_modules/angular-jwt/dist/angular-jwt.min.js"></script>
+
+    <!-- Main -->
     <script type="text/javascript" src="main/main.js"></script>
-    <script type="text/javascript" src="main/mainDirective.js"></script>
-    <script type="text/javascript" src="header/headerController.js"></script>
-    <script type="text/javascript" src="home/homeController.js"></script>
-    <script type="text/javascript" src="mySpace/mySpaceMainController.js"></script>
-    <script type="text/javascript" src="mySpace/mySpaceNavbarController.js"></script>
-    <script type="text/javascript" src="mySpace/mySpaceDescriptionController.js"></script> 
-    <script type="text/javascript" src="mySpace/mySpaceService.js"></script>
-    <script type="text/javascript" src="search/searchController.js"></script>
-    <script type="text/javascript" src="test1/test1Controller.js"></script>
-    <script type="text/javascript" src="test1/test1Service.js"></script>
-    <script type="text/javascript" src="test1/test1Directive.js"></script>
-    <script type="text/javascript" src="test2/test2Controller.js"></script>
-    <script type="text/javascript" src="connection/connectionController.js"></script>
-    <script type="text/javascript" src="connection/connectionService.js"></script>
+
+    <!-- Directives -->
+    <script type="text/javascript" src="directives/test1Directive.js"></script>
+    <script type="text/javascript" src="directives/mainDirective.js"></script>
+
+    <!-- Services -->
+    <script type="text/javascript" src="services/test1Service.js"></script>
+    <script type="text/javascript" src="services/httpParamService.js"></script>
+    <script type="text/javascript" src="services/httpService.js"></script>
+    <script type="text/javascript" src="services/mySpaceService.js"></script>
+
+    <!-- Controllers -->
+    <script type="text/javascript" src="app/test1/test1Controller.js"></script>
+    <script type="text/javascript" src="app/test2/test2Controller.js"></script>
+    <script type="text/javascript" src="app/header/headerController.js"></script>
+    <script type="text/javascript" src="app/home/homeController.js"></script>
+    <script type="text/javascript" src="app/mySpace/mySpaceMainController.js"></script>
+    <script type="text/javascript" src="app/mySpace/mySpaceNavbarController.js"></script>
+    <script type="text/javascript" src="app/mySpace/mySpaceDescriptionController.js"></script>
+    <script type="text/javascript" src="app/search/searchController.js"></script>
+    <script type="text/javascript" src="app/connection/connectionController.js"></script>
+
 
 </body>
 

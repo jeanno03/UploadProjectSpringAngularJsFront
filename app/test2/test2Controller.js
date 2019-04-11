@@ -1,4 +1,4 @@
-app.controller("Test2Controller", function ($rootScope, $scope, $http, $location, UserService, $localStorage) {
+app.controller("Test2Controller", function ($rootScope, $scope, UserService, $localStorage) {
 
     $rootScope.currentUserServiceRoot = {};
     $rootScope.currentUserServiceRoot = UserService.getMyUser();
