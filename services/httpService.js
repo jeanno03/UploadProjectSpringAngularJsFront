@@ -44,7 +44,8 @@ httpService.factory("httpUrlService", function ($http, httpHeaderService, httpPo
 httpService.factory("httpPowerGedService", function () {
     return {
         getUrlMain: function () {
-            var powerGedUrl = "https://power-ged:8443/Main/";
+            var powerGedUrl = "https://91.134.143.236:8443/Main/";
+            // var powerGedUrl = "https://power-ged:8443/Main/";
             // var powerGedUrl = "http://power-ged:8080/Main/";          
             // var powerGedUrl = "http://localhost:8080/";
             return powerGedUrl;

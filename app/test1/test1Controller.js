@@ -16,16 +16,16 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
     $scope.uploadResult = "";
 
     //contient le mdp pour accéder au controller de test
-    var customHeader = {
-        headers:
-        {
-            "bearer": "1234"
-        }
-    };
+    // var customHeader = {
+    //     headers:
+    //     {
+    //         "bearer": "1234"
+    //     }
+    // };
 
     $scope.getDataTest = function () {
         $scope.str = null;
-        $http.get(httpPowerGedService.getUrlMain() +"Test/getDataTest", customHeader)
+        $http.get(httpPowerGedService.getUrlMain() +"Test/getDataTest")
             .then(function (response) {
                 data = response.data;
                 $scope.str = data;
@@ -38,7 +38,7 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
     $scope.getAllUsersTest = function () {
         $scope.myRoles = {};
         $scope.mySpaces = {};
-        $http.get(httpPowerGedService.getUrlMain() +"Test/getAllUsersTest", customHeader)
+        $http.get(httpPowerGedService.getUrlMain() +"Test/getAllUsersTest")
             .then(function (response) {
                 data = response.data;
                 $scope.myUsers = data;
