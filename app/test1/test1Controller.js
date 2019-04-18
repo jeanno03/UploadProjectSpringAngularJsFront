@@ -1,4 +1,4 @@
-app.controller("Test1Controller", function ($scope, $rootScope, $http, $location, Logger, UserService, $localStorage, jwtHelper, httpHeaderService) {
+app.controller("Test1Controller", function ($scope, $rootScope, $http, $location, Logger, UserService, $localStorage, jwtHelper, httpHeaderService, httpPowerGedService) {
     $scope.myUsers = {};
     Logger.turnOn(); // On active le logger
     Logger.log('Page chargée !'); // Log au chargement de la page
@@ -25,7 +25,7 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
 
     $scope.getDataTest = function () {
         $scope.str = null;
-        $http.get("http://localhost:8080/Test/getDataTest", customHeader)
+        $http.get(httpPowerGedService.getUrlMain() +"Test/getDataTest", customHeader)
             .then(function (response) {
                 data = response.data;
                 $scope.str = data;
@@ -38,7 +38,7 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
     $scope.getAllUsersTest = function () {
         $scope.myRoles = {};
         $scope.mySpaces = {};
-        $http.get("http://localhost:8080/Test/getAllUsersTest", customHeader)
+        $http.get(httpPowerGedService.getUrlMain() +"Test/getAllUsersTest", customHeader)
             .then(function (response) {
                 data = response.data;
                 $scope.myUsers = data;
@@ -69,7 +69,7 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
     }
 
     $scope.getConnect = function () {
-        $http.post("http://localhost:8080/Test/getConnect", $scope.credential).then(function (response) {
+        $http.post(httpPowerGedService.getUrlMain() +"Test/getConnect", $scope.credential).then(function (response) {
             console.log("success");
             data = response.data;
             console.log("data.login : " + data.login);
@@ -110,7 +110,7 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
 
     $scope.doUploadFile = function () {
 
-        var url = "http://localhost:8080/Test/uploadingPost";
+        var url = httpPowerGedService.getUrlMain() +"Test/uploadingPost";
 
 
         var data = new FormData();
@@ -196,7 +196,7 @@ app.controller("Test1Controller", function ($scope, $rootScope, $http, $location
     $scope.init();
 
     $scope.getFile=function(){
-        var url ="http://localhost:8080/Test/download2?image=Albator-007";
+        var url =httpPowerGedService.getUrlMain() +"Test/download2?image=Albator-007";
         window.open(url, '_blank', '');
     }
 

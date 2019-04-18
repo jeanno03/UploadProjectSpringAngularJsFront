@@ -74,7 +74,8 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $location,
     //http://javabypatel.blogspot.com/2016/11/download-binary-file-angularjs-rest.html
     $scope.downloadingMyFile = function (id, name) {
         console.log("angularJs - downloadingMyFile2");
-        var url = "http://localhost:8080/MyFile/downloadingMyFile?fichier=" + id;
+        // var url = "http://localhost:8080/MyFile/downloadingMyFile?fichier=" + id;
+        var url = httpUrlService.getUrlDownloadingMyFile(id);
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.setRequestHeader("token", $localStorage.jwt.token);
