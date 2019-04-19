@@ -8,6 +8,8 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $location,
         multipartFiles: []
     }
 
+    $scope.getPourcentage = null;
+
     //(requete native en back)
     $rootScope.getAllMySpacesJwt = function () {
         console.log("getAllMySpacesJwt()");
@@ -34,6 +36,8 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $location,
 
     $scope.doUploadFile = function () {
 
+        $scope.getPourcentage=0;
+
         var mySpaceId = $rootScope.currentRootMySpace.id;
         var data = new FormData();
 
@@ -41,13 +45,17 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $location,
             data.append("multipartFiles", $scope.myForm.multipartFiles[i])
         }
 
+        $scope.getPourcentage=20;
+
         httpUrlService.getUploadFile(mySpaceId, data).
             then(function (response) {
                 //Success
                 data = response.data;
                 $scope.uploadResult = data;
 
-                alert("votre fichier a été uploadé!");
+                // alert("votre fichier a été uploadé!");
+
+                $scope.getPourcentage=100;
 
                 //je réinitialise
                 $scope.myForm = {

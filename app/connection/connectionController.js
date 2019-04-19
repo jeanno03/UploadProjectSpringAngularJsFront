@@ -1,4 +1,4 @@
-app.controller("ConnectionController", function ($scope, $rootScope, $location, $localStorage, httpUrlService) {
+app.controller("ConnectionController", function ($scope, $rootScope, $location, $localStorage, httpUrlService, shareMySpaceServices, shareMyFileService) {
 
     $scope.credential = {};
 
@@ -34,6 +34,14 @@ app.controller("ConnectionController", function ($scope, $rootScope, $location, 
     $scope.toDisconnect = function () {
         $localStorage.jwt = {};
         $rootScope.jwt = null;
+
+        $rootScope.customHeader={};
+
+        shareMySpaceServices.destroyCurrentRootMySpace();
+        shareMyFileService.destroyCurrentRootMySpace();
+
+        $rootScope.currentRootMySpaces={};
+        $rootScope.currentRootMySpace={};
 
         alert("Vous avez été déconnecté!");
         $location.path("/home");

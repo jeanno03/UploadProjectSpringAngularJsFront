@@ -16,7 +16,6 @@ mySpaceService.factory("shareMySpaceServices", function () {
 
         destroyCurrentRootMySpace: function () {
             currentRootMySpaces = {};
-            return currentRootMySpaces;
         }
     }
 
@@ -39,7 +38,6 @@ mySpaceService.factory("shareMyFileService", function () {
 
         destroyCurrentRootMySpace: function () {
             currentRootMySpace = null;
-            return currentRootMySpace;
         }
     }
 })
