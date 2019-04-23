@@ -36,7 +36,7 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $location,
 
     $scope.doUploadFile = function () {
 
-        $scope.getPourcentage=0;
+        $scope.getPourcentage=1;
 
         var mySpaceId = $rootScope.currentRootMySpace.id;
         var data = new FormData();
@@ -45,7 +45,7 @@ app.controller("mySpaceMainController", function ($scope, $rootScope, $location,
             data.append("multipartFiles", $scope.myForm.multipartFiles[i])
         }
 
-        $scope.getPourcentage=20;
+        $scope.getPourcentage=5;
 
         httpUrlService.getUploadFile(mySpaceId, data).
             then(function (response) {
